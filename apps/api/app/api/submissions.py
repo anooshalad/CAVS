@@ -1,15 +1,14 @@
 from pathlib import Path
-from uuid import uuid4
 
 from fastapi import APIRouter, File, HTTPException, UploadFile
+
+from app.schemas.submission import UploadResponse
+from app.services.storage import save_uploaded_file
 
 router = APIRouter(
     prefix="/submissions",
     tags=["Submissions"],
 )
-
-UPLOAD_DIR = Path("storage/uploads")
-UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 ALLOWED_EXTENSIONS = {
     ".pdf",
@@ -19,7 +18,10 @@ ALLOWED_EXTENSIONS = {
 }
 
 
-@router.post("/artwork")
+@router.post(
+    "/artwork",
+    response_model=UploadResponse,
+)
 async def upload_artwork(file: UploadFile = File(...)):
     extension = Path(file.filename).suffix.lower()
 
@@ -29,19 +31,12 @@ async def upload_artwork(file: UploadFile = File(...)):
             detail="Unsupported file type.",
         )
 
-    submission_id = str(uuid4())
+    saved = save_uploaded_file(file)
 
-    stored_filename = f"{submission_id}{extension}"
-
-    destination = UPLOAD_DIR / stored_filename
-
-    with destination.open("wb") as buffer:
-        buffer.write(await file.read())
-
-    return {
-        "submission_id": submission_id,
-        "original_filename": file.filename,
-        "stored_filename": stored_filename,
-        "content_type": file.content_type,
-        "status": "uploaded",
-    }
+    return UploadResponse(
+        submission_id=saved["submission_id"],
+        original_filename=file.filename,
+        stored_filename=saved["stored_filename"],
+        content_type=file.content_type,
+        status="uploaded",
+    )
