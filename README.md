@@ -1,4 +1,4 @@
-# CAVS — Corrective & Automated Verification System
+# CAVS — Compliance Artwork Verification System
 
 A lightweight full-stack application for automated artwork compliance verification, focused on pharmaceutical artwork. CAVS processes uploaded PDFs or images, runs OCR, extracts structured fields (product name, dosage, batch number, expiry), and validates them against simple compliance rules.
 
