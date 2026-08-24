@@ -198,11 +198,3 @@ Credits
 
 - Built with FastAPI, EasyOCR, PyMuPDF, React, and Vite.
 
-If you want, a follow-up can:
-- Generate a requirements.txt with exact pinned dependencies detected from the environment,
-- Add a CI job to run linting and basic smoke tests,
-- Add a LICENSE file and CONTRIBUTING guidelines.
-
----
-
-If anything is missing or you'd like the README tailored (e.g., a shorter quickstart, Dockerfile, or sample data), tell me which sections to change and preference for formatting.
