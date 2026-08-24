@@ -148,6 +148,12 @@ A successful response looks like:
 
 ---
 
+
+Future Scope: The long-term vision for CAVS is to introduce a corrective layer that can assist in identifying, proposing, and applying corrections to detected artwork compliance violations, followed by automated re-verification.
+
+---
+
+
 Troubleshooting & Notes
 
 - EasyOCR & PyTorch: EasyOCR depends on PyTorch (torch). If installation fails, follow the official PyTorch installation instructions for your platform and CUDA version (if using GPU). For CPU-only usage, install CPU wheels.
